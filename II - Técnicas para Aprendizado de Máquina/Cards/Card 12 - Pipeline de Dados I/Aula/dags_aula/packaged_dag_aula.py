@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
+# Pega as função de pasta functions
 from functions.helpers import first_task, second_task, third_task
 
 from datetime import datetime, timedelta
@@ -8,6 +9,7 @@ default_args = {
     'start_date': datetime(2019, 1, 1),
     'owner': 'Airflow'
 }
+
 
 with DAG(dag_id='packaged_dag', schedule_interval="0 0 * * *", default_args=default_args) as dag:
 
@@ -20,4 +22,4 @@ with DAG(dag_id='packaged_dag', schedule_interval="0 0 * * *", default_args=defa
     # Task 3
     python_task_3 = PythonOperator(task_id='python_task_3', python_callable=third_task)
 
-    python_task_1 >> python_task_2 >> python_task_3
+    python_task_1 >> python_task_2 >> python_task_3l

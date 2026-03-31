@@ -18,30 +18,38 @@ class TestDagValidation:
             dagbag.import_errors
         )
 
+    # Testa as velocidade das DAGs
     def test_time_import_dags(self, dagbag):
         """
             Verify that DAGs load fast enough
             - check for loading time
         """
         stats = dagbag.dagbag_stats
+        # lista a velocidade maior que o limite de segundo
         slow_dags = list(filter(lambda f: f.duration > self.LOAD_SECOND_THRESHOLD, stats))
         res = ', '.join(map(lambda f: f.file[1:], slow_dags))        
 
+        # Se pelo meno um DAG for lento, lança uma exceção e marca o teste como falho
         assert len(slow_dags) == 0, "The following DAGs take more than {0}s to load: {1}".format(
             self.LOAD_SECOND_THRESHOLD,
             res
         )
 
+    # Verifica checa se os DAGs possuem email de alerta
+    # O marcador .skip é para poder pular essas verificações, desta forma, posso executar um subconjunto dos testes
     @pytest.mark.skip(reason="not yet added to the DAGs")
     def test_default_args_email(self, dagbag):
         """
             Verify that DAGs have the required email
             - Check email
         """
+        # Para toda DAG, verifica se está preenchido a campo email
         for dag_id, dag in dagbag.dags.items():
             emails = dag.default_args.get('email', [])
+            # Se pelo menos uma não tiver = falha
             assert self.REQUIRED_EMAIL in emails, "The mail {0} for sending alerts is missing from the DAG {1}".format(self.REQUIRED_EMAIL, dag_id)
     
+    # Verifica se os DAGs tem um número de tentativas
     @pytest.mark.skip(reason="not yet added to the DAGs")
     def test_default_args_retries(self, dagbag):
         """
@@ -52,6 +60,7 @@ class TestDagValidation:
             retries = dag.default_args.get('retries', None)
             assert retries is not None, "You must specify a number of retries in the DAG: {0}".format(dag_id)
 
+    # Verifica se os DAGs tem o tempo de delay para realizar uma nova tentativa
     @pytest.mark.skip(reason="not yet added to the DAGs")
     def test_default_args_retry_delay(self, dagbag):
         """
@@ -62,6 +71,7 @@ class TestDagValidation:
             retry_delay = dag.default_args.get('retry_delay', None)
             assert retry_delay is not None, "You must specify a retry delay (seconds) in the DAG: {0}".format(dag_id)
  
+    # Verifica a quantidade de DAGs tem, o mínimo é 7, menos que sete irá falhar
     def test_number_of_dags(self, dagbag):
         """
             Verify if there is the right number of DAGs in the dag folder

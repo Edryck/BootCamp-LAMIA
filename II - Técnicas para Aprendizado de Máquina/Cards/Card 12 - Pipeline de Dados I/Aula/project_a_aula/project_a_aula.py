@@ -8,6 +8,7 @@ default_args = {
     'owner': 'Airflow'
 }
 
+# Exemplo de DAG, vai executar diariamente à meia noite
 with DAG(dag_id='project_a', schedule_interval="0 0 * * *", default_args=default_args, catchup=False) as dag:
     
     # Task 1

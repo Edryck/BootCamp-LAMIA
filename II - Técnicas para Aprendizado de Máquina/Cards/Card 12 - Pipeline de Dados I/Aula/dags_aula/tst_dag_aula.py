@@ -17,10 +17,11 @@ with DAG(dag_id='tst_dag', schedule_interval='0 0 * * *', default_args=default_a
 
     task_2 = PythonOperator(task_id='task_2', python_callable=process)
 
+    # Gera três tasks em uma list comprehensions
     # Tasks dynamically generated 
     tasks = [DummyOperator(task_id='task_{0}'.format(t)) for t in range(3, 6)]
 
     task_6 = DummyOperator(task_id='task_6')
 
-    task_1 >> task_2 >> tasks >> task_6
+    task_1 >> task_2 >> tasks >> task_6l
         

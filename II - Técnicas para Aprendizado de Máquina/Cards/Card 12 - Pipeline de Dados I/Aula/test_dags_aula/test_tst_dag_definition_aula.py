@@ -14,6 +14,7 @@ class TestTstDagDefinition:
 
     compare = lambda self, x, y: collections.Counter(x) == collections.Counter(y)
 
+    # Verifica a quantidade de tarefas, mínimo é 6
     def test_nb_tasks(self, dag):
         """
             Verify the number of tasks in the DAG
@@ -21,6 +22,7 @@ class TestTstDagDefinition:
         nb_tasks = len(dag.tasks)
         assert nb_tasks == self.EXPECTED_NB_TASKS, "Wrong number of tasks, {0} expected, got {1}".format(self.EXPECTED_NB_TASKS, nb_tasks)
 
+    # Verifica se o DAG tem as tarefas esperada, estão espeficicadas na constante no topo deste arquivo
     def test_contain_tasks(self, dag):
         """
             Verify if the DAG is composed of the expected tasks
@@ -28,13 +30,16 @@ class TestTstDagDefinition:
         task_ids = list(map(lambda task: task.task_id, dag.tasks))
         assert self.compare(task_ids, self.EXPECTED_TASKS)
 
+    # Parametriza as depedências, basicamente ele define a tarefa, upstream e o downstream esperado da tarefa
+    # dessa forma diminui o código e não precisa fazer uma função para cada verificar cada 
+    # depedência
     @pytest.mark.parametrize("task, expected_upstream, expected_downstream", 
         [
             ("task_1", [], ["task_2"]), 
             ("task_2", ["task_1"], ["task_3", "task_4", "task_5"]), 
             ("task_3", ["task_2"], ["task_6"])
         ]
-    )
+    ) # Faz uma verificação de depedências, ele usa uma parametrização ↑ (acima)
     def test_dependencies_of_tasks(self, dag, task, expected_upstream, expected_downstream):
         """
             Verify if a given task has the expected upstream and downstream dependencies
@@ -48,8 +53,11 @@ class TestTstDagDefinition:
         """
             Verify that the start_date is < current date and catchup = False
         """
-        True
+        # Vai verificar, utilizando o pendulum, se a data de início é anterior à data atual e se o catchup está como False
+        # caso contrário, vai falhar neste teste
+        assert dag.default_args['start_date'] < pendulum.now() and dag.catchup == False
 
+    # Está vai verificar se todas as datas das tasks são as mesmas
     def test_same_start_date_all_tasks(self, dag):
         """
             Best Practice: All of your tasks should have the same start_date
