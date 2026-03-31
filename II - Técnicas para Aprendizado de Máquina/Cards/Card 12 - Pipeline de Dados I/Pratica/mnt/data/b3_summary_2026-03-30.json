@@ -1,44 +1,44 @@
 [
   {
     "Ticker":"WEGE3.SA",
-    "Close":49.0499992371,
-    "Volume":8671300,
-    "Variacao_%":0.59
-  },
-  {
-    "Ticker":"ABEV3.SA",
-    "Close":14.8400001526,
-    "Volume":18146700,
-    "Variacao_%":-0.07
-  },
-  {
-    "Ticker":"PETR4.SA",
-    "Close":49.6699981689,
-    "Volume":51326100,
-    "Variacao_%":-0.16
-  },
-  {
-    "Ticker":"VALE3.SA",
-    "Close":79.5,
-    "Volume":18749900,
-    "Variacao_%":-0.93
+    "Close":51.0099983215,
+    "Volume":11788000,
+    "Variacao_%":2.9
   },
   {
     "Ticker":"ITUB4.SA",
-    "Close":41.5999984741,
-    "Volume":18378600,
-    "Variacao_%":-0.95
+    "Close":43.4799995422,
+    "Volume":33384700,
+    "Variacao_%":2.81
+  },
+  {
+    "Ticker":"VALE3.SA",
+    "Close":82.4800033569,
+    "Volume":24937100,
+    "Variacao_%":2.16
   },
   {
     "Ticker":"BBDC4.SA",
-    "Close":18.4699993134,
-    "Volume":32425900,
-    "Variacao_%":-1.6
+    "Close":19.1700000763,
+    "Volume":41280900,
+    "Variacao_%":1.97
+  },
+  {
+    "Ticker":"ABEV3.SA",
+    "Close":15.25,
+    "Volume":36139300,
+    "Variacao_%":1.67
   },
   {
     "Ticker":"BBAS3.SA",
-    "Close":22.3999996185,
-    "Volume":23491700,
-    "Variacao_%":-2.18
+    "Close":23.0,
+    "Volume":25544400,
+    "Variacao_%":1.23
+  },
+  {
+    "Ticker":"PETR4.SA",
+    "Close":48.6699981689,
+    "Volume":78788100,
+    "Variacao_%":-2.8
   }
 ]
