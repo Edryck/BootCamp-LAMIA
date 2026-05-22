@@ -433,3 +433,5 @@ FodyWeavers.xsd
 *.yml
 *.DS_Store
 *.sh
+
+*.ipynb_checkpoints
