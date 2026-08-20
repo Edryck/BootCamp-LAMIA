@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.env
+mnt/airflow/logs/*
+!mnt/airflow/logs/.gitkeep
+data/*
